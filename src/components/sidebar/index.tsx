@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { Button } from '../ui/button'
+import { ModeToggle } from '../mode-toggle'
 
 function Sidebar() {
 	const routerUrls = [
@@ -9,14 +10,20 @@ function Sidebar() {
 	]
 
 	return (
-		<div className="w-3xs p-3 flex flex-col gap-4 border-r h-screen">
-			{routerUrls.map((item) => {
-				return (
-					<Link className="w-full" to={{ pathname: item.url }}>
-						<Button className="w-full">{item.label}</Button>
-					</Link>
-				)
-			})}
+		<div className="hidden flex-col justify-between w-3xs p-3 h-screen border-r md:flex">
+			<div className="flex flex-col gap-4">
+				{routerUrls.map((item) => {
+					return (
+						<Link key={item.label} className="w-full" to={{ pathname: item.url }}>
+							<Button variant="outline" className="w-full">
+								{item.label}
+							</Button>
+						</Link>
+					)
+				})}
+			</div>
+
+			<ModeToggle />
 		</div>
 	)
 }

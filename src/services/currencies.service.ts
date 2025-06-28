@@ -1,5 +1,5 @@
 import { httpClient } from '../lib/http'
-import type { CurrenriesListData } from '../types/currencies.type'
+import type { CurrenriesListData, ExchangeRateByCurrencyData } from '../types/currencies.type'
 
 /*
 	on this site I use: https://www.exchangerate-api.com/docs/supported-currencies
@@ -9,6 +9,6 @@ import type { CurrenriesListData } from '../types/currencies.type'
 export const getAllCurrencies = async () => {
 	return (await httpClient.get(`/codes`)) as CurrenriesListData
 }
-export const getExchangeRateByCurrency = async ({ countryCode }: { countryCode: string }) => {
-	return (await httpClient.get(`/latest/${countryCode}`)) as CurrenriesListData
+export const getExchangeRateByCurrency = async ({ from, to }: { from: string; to: string }) => {
+	return (await httpClient.get(`/pair/${from}/${to}`)) as ExchangeRateByCurrencyData
 }

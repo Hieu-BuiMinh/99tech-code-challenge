@@ -1,23 +1,26 @@
 import { useQuery } from '@tanstack/react-query'
 import { getAllCurrencies, getExchangeRateByCurrency } from '../../services/currencies.service'
 
-export const useCurrencies = ({ countryCode }: { countryCode?: string }) => {
-	const curreniesQuery = useQuery({
-		queryKey: [''],
-		queryFn: async () => {
-			return await getAllCurrencies()
-		},
-		staleTime: 3 * 60 * 60 * 1000,
-	})
+export const useCurrencies = () => {
+	const useCurreniesQuery = () =>
+		useQuery({
+			queryKey: ['use_get_all_currencies_query'],
+			queryFn: async () => {
+				return await getAllCurrencies()
+			},
+			staleTime: 3 * 60 * 60 * 1000,
+		})
 
-	const exchangeCurrencyRateQuery = useQuery({
-		queryKey: [''],
-		queryFn: async () => {
-			if (!countryCode) return null
-			return await getExchangeRateByCurrency({ countryCode })
-		},
-		staleTime: 3 * 60 * 60 * 1000,
-		enabled: !!countryCode,
-	})
-	return { curreniesQuery, exchangeCurrencyRateQuery }
+	const useExchangeCurrencyRateQuery = ({ from, to }: { from: string; to: string }) =>
+		useQuery({
+			queryKey: ['use_exchange_currency_rate_query', from, to],
+			queryFn: async () => {
+				if (!from) return null
+				return await getExchangeRateByCurrency({ from, to })
+			},
+			staleTime: 0,
+			enabled: !!from && !!to,
+		})
+
+	return { useCurreniesQuery, useExchangeCurrencyRateQuery }
 }

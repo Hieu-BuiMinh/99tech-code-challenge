@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Button } from '../../components/ui/button'
 import { Input } from '../../components/ui/input'
+import { Button } from '../../components/ui/button'
 
 function Problem1() {
 	const [amount, setAmount] = useState(0)
@@ -52,21 +52,25 @@ function Problem1() {
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-4">
 				<div className="col-span-1 flex flex-col gap-3">
 					<span>Function 01 result: {results.num01}</span>
-					<Button onClick={() => handleCalculation(sumToNumber01, 'num01')}>func 01</Button>
+					<Button variant="outline" onClick={() => handleCalculation(sumToNumber01, 'num01')}>
+						func 01
+					</Button>
 				</div>
 
 				<div className="col-span-1 flex flex-col gap-3">
 					<span>Function 02 result: {results.num02}</span>
-					<Button onClick={() => handleCalculation(sumToNumber02, 'num02')}>func 02</Button>
+					<Button variant="outline" onClick={() => handleCalculation(sumToNumber02, 'num02')}>
+						func 02
+					</Button>
 				</div>
 
 				<div className="col-span-1 flex flex-col gap-3">
 					<span>Function 03 result: {results.num03}</span>
-					<Button onClick={() => handleCalculation(sumToNumber03, 'num03')}>func 03</Button>
+					<Button variant="outline" onClick={() => handleCalculation(sumToNumber03, 'num03')}>
+						func 03
+					</Button>
 				</div>
 			</div>
-
-			<p className='text-muted-foreground'>45 mins to complete</p>
 		</div>
 	)
 }
